@@ -29,6 +29,7 @@ int main() {
     // Inclua o uso de continue e break dentro dos loops.
 
     int movimento_torre = 5, movimento_bispo = 5, movimento_rainha = 8;
+    int movimento_cavalo_1 = 2, movimento_cavalo_2 = 1;
 
     printf("\nMovimento do Bispo:");
     for (int i = 0; i < movimento_torre; i++) {
@@ -47,6 +48,15 @@ int main() {
         printf("\nEsquerda");
         movimento_rainha--;
     } while (movimento_rainha > 0);
+
+    printf("\n\nMovimento do Cavalo:");
+    for (int i = 0; i < movimento_cavalo_2; i++) {
+        do {
+            printf("\nBaixo");
+            movimento_cavalo_1--;
+        } while (movimento_cavalo_1 > 0);
+        printf("\nEsquerda");
+    }
     
     return 0;
 }
