@@ -4,6 +4,51 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
 // O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
 
+void mover_torre(int casas, char direcao[]) {
+    if (casas > 0) {
+        printf("\n%s", direcao);
+        mover_torre(casas - 1, direcao);
+    }
+}
+
+void mover_bispo(int casas, char direcao_horizontal[], char direcao_vertical[]) {
+    if (casas == 0) return;
+    int moveu = 0;
+    while (!moveu) {
+        printf("\n%s", direcao_vertical);
+        do
+        {
+            printf(", %s", direcao_horizontal);
+        } while (moveu);
+        moveu = 1;
+    }
+    mover_bispo(casas - 1, direcao_horizontal, direcao_vertical);
+}
+
+void mover_rainha(int casas, char direcao_horizontal[], char direcao_vertical[]) {
+    if (casas > 0) {
+        if (direcao_vertical == "") {
+            printf("\n%s", direcao_horizontal);
+        } else if (direcao_horizontal == "") {
+            printf("\n%s", direcao_vertical);
+        } else {
+            printf("\n%s, %s", direcao_vertical, direcao_horizontal);
+        }
+        mover_rainha(casas - 1, direcao_horizontal, direcao_vertical);
+    }
+}
+
+void mover_cavalo(char direcao_1[], char direcao_2[]) {
+    for (int atual = 0; atual < 2; atual++) {
+        printf("\n%s", direcao_1);
+        if (atual < 1) continue;
+        for (int i = 0; i < 1; i++) {
+            printf("\n%s", direcao_2);
+        }
+        break;
+    }
+}
+
 int main() {
     // Nível Novato - Movimentação das Peças
     // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
@@ -29,34 +74,18 @@ int main() {
     // Inclua o uso de continue e break dentro dos loops.
 
     int movimento_torre = 5, movimento_bispo = 5, movimento_rainha = 8;
-    int movimento_cavalo_1 = 2, movimento_cavalo_2 = 1;
 
     printf("\nMovimento do Bispo:");
-    for (int i = 0; i < movimento_torre; i++) {
-        printf("\nDireita");
-    }
+    mover_bispo(movimento_bispo, "Direita", "Cima");
 
     printf("\n\nMovimento da Torre:");
-    while (movimento_bispo > 0) {
-        printf("\nCima, Direita");
-        movimento_bispo--;
-    }
+    mover_torre(movimento_torre, "Direita");
 
     printf("\n\nMovimento da Rainha:");
-    do
-    {
-        printf("\nEsquerda");
-        movimento_rainha--;
-    } while (movimento_rainha > 0);
+    mover_rainha(movimento_rainha, "Esquerda", "");
 
     printf("\n\nMovimento do Cavalo:");
-    for (int i = 0; i < movimento_cavalo_2; i++) {
-        do {
-            printf("\nBaixo");
-            movimento_cavalo_1--;
-        } while (movimento_cavalo_1 > 0);
-        printf("\nEsquerda");
-    }
+    mover_cavalo("Cima", "Direita");
     
     return 0;
 }
